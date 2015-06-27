@@ -20,7 +20,7 @@ if(isServer)exitWith{};
 	Contact : halvhjearne@gmail.com
 	
 	dayz_spaceinterupt add this:
-	_this call HALV_earplugtoggle
+	_dikCode call HALV_earplugtoggle;
 */
 #include "settings.sqf";
 
@@ -38,7 +38,7 @@ HALV_currentsoundlvl = 1;
 
 HALV_earplugtoggle = {
 	_msg = "";
-	_key = _this select 1;
+	_key = _this;
 	if(_key in (HALV_EarplugKeys select 0) || {_key in actionKeys _x}count(HALV_EarplugKeys select 1) > 0)then{
 		HALV_currentsoundlvl = HALV_currentsoundlvl - 0.1;
 		if(HALV_currentsoundlvl < 0)then{
