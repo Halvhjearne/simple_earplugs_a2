@@ -46,7 +46,7 @@ HALV_earplugtoggle = {
 		};
 		1 fadeSound HALV_currentsoundlvl;
 		_msg = format["Volume Decreased (%1%2) ...",round(HALV_currentsoundlvl*100),"%"];
-		if(HALV_currentsoundlvl isEqualTo 0)then{_msg = format["Muted (0%1) ...","%"];};
+		if(HALV_currentsoundlvl == 0)then{_msg = format["Muted (0%1) ...","%"];};
 		hint _msg;
 		systemChat _msg;
 	};
@@ -57,7 +57,7 @@ HALV_earplugtoggle = {
 		};
 		_msg = format["Volume Increased (%1%2)...",round(HALV_currentsoundlvl*100),"%"];
 		1 fadeSound HALV_currentsoundlvl;
-		if(HALV_currentsoundlvl isEqualTo 1)then{_msg = format["Volume (100%1)","%"];};
+		if(HALV_currentsoundlvl == 1)then{_msg = format["Volume (100%1)","%"];};
 		hint _msg;
 		systemChat _msg;
 	};
@@ -65,11 +65,11 @@ HALV_earplugtoggle = {
 
 _action = player addAction [format["<img image='%1'/> <t color='#0096ff'>%2</t>",_pic,_txt],_scriptpath,[], -20, false, true, _autohotkey, ""];
 
-waitUntil{sleep 1;!(player isEqualTo (vehicle player))};
+waitUntil{sleep 1;(player != (vehicle player))};
 _set = true;
 while{alive player}do{
 	if(HALV_AUTOEARPLUGS)then{
-		_isWalking = player isEqualTo (vehicle player);
+		_isWalking = player == (vehicle player);
 		if(_isWalking)then{
 			if !(_set)then{
 				HALV_currentsoundlvl = _HALV_autoUPDOWNVAL select 1;
