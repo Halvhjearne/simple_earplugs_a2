@@ -63,7 +63,7 @@ HALV_earplugtoggle = {
 	};
 };
 
-_action = player addAction [format["<img size='1.5'image='%1'/> <t color='#0096ff'>%2</t>",_pic,_txt],_scriptpath,[], -20, false, true, _autohotkey, ""];
+_action = player addAction [format["<img image='%1'/> <t color='#0096ff'>%2</t>",_pic,_txt],_scriptpath,[], -20, false, true, _autohotkey, ""];
 
 waitUntil{sleep 1;!(player isEqualTo (vehicle player))};
 _set = true;
