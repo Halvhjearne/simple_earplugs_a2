@@ -1,6 +1,6 @@
 if(isServer)exitWith{};
 /*
-	"Simple" Earplugs script by Halv
+	"Simple" Earplugs script by Halv a2 version
 
 	Copyright (C) 2015  Halvhjearne
 
@@ -18,6 +18,9 @@ if(isServer)exitWith{};
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 	Contact : halvhjearne@gmail.com
+	
+	dayz_spaceinterupt add this:
+	_this call HALV_earplugtoggle
 */
 #include "settings.sqf";
 
@@ -26,7 +29,7 @@ waitUntil {!dialog};
 
 sleep 10;
 
-if !(_txt isEqualTo "")then{
+if (_txt != "")then{
 	systemChat _txt;
 	hint _txt;
 };
@@ -60,27 +63,7 @@ HALV_earplugtoggle = {
 	};
 };
 
-_pic = "\a3\Ui_f\data\gui\Rsc\RscDisplayArcadeMap\section_outrowin_ca.paa";
-_txt = "Auto Earplugs On";
-if(HALV_AUTOEARPLUGS)then{
-	_pic = "\a3\Ui_f\data\gui\Rsc\RscDisplayArcadeMap\section_outroloose_ca.paa";
-	_txt = "Auto Earplugs Off";
-};
-
-_action = player addAction [format["<img size='1.5'image='%1'/> <t color='#0096ff'>%2</t>",_pic,_txt],{
-	if(HALV_AUTOEARPLUGS)then{
-		HALV_AUTOEARPLUGS = false;
-		player setUserActionText [_this select 2,"<img size='1.5'image='\a3\Ui_f\data\gui\Rsc\RscDisplayArcadeMap\section_outrowin_ca.paa'/> <t color='#0096ff'>Auto Earplugs On</t>"];
-		cutText ["Auto earplugs off","PLAIN DOWN"];
-		
-	}else{
-		HALV_AUTOEARPLUGS = true;
-		player setUserActionText [_this select 2,"<img size='1.5'image='\a3\Ui_f\data\gui\Rsc\RscDisplayArcadeMap\section_outroloose_ca.paa'/> <t color='#0096ff'>Auto Earplugs Off</t>"];
-		cutText ["Auto earplugs on","PLAIN DOWN"];
-	};
-},[], -20, false, true, _autohotkey, ""];
-
-HALV_earplugsKeyDown = (findDisplay 46) displayAddEventHandler ["KeyDown",{_this call HALV_earplugtoggle}];
+_action = player addAction [format["<img size='1.5'image='%1'/> <t color='#0096ff'>%2</t>",_pic,_txt],_scriptpath,[], -20, false, true, _autohotkey, ""];
 
 waitUntil{sleep 1;!(player isEqualTo (vehicle player))};
 _set = true;
@@ -111,12 +94,6 @@ while{alive player}do{
 waitUntil{sleep 1;!(alive player)};
 player removeAction _action;
 
-(findDisplay 46) displayRemoveEventHandler ["KeyDown", HALV_earplugsKeyDown];
-
 3 fadeSound 1;
 
 systemChat "Earplugs was removed ...";
-
-waitUntil{sleep 1;(alive player)};
-
-[] execVM __FILE__;

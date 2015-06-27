@@ -1,6 +1,6 @@
 if(isServer)exitWith{};
 /*
-	"Simple" Earplugs script by Halv
+	"Simple" Earplugs script by Halv a2 version
 
 	Copyright (C) 2015  Halvhjearne
 
@@ -42,6 +42,12 @@ _HALV_autoUPDOWNVAL = [
 1
 ];
 
+_scriptpath = "addons\earplugs\onoffscript.sqf";
+
 //info text show on login, "" to disable
 _txt = "Earplugs Enabled, press + to increase or - reduce sounds (uk/us keyboard)...";
+//auto action picture
+_pic = "\a3\Ui_f\data\gui\Rsc\RscDisplayArcadeMap\section_outrowin_ca.paa";
+//auto action picture
+_txt = "Auto Earplugs Switched";
 //============================== End Settings ==============================\\
