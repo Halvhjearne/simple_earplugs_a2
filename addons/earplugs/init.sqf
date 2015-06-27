@@ -19,7 +19,7 @@ if(isServer)exitWith{};
 
 	Contact : halvhjearne@gmail.com
 	
-	dayz_spaceinterupt add this:
+	dayz_spaceinterupt add this right under:
 	_handled = false;
 	
 	if(_dikCode in (HALV_EarplugKeys select 0) || {_dikCode in actionKeys _x}count(HALV_EarplugKeys select 1) > 0)then{
