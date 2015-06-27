@@ -47,7 +47,7 @@ _scriptpath = "addons\earplugs\onoffscript.sqf";
 //info text show on login, "" to disable
 _txt = "Earplugs Enabled, press + to increase or - reduce sounds (uk/us keyboard)...";
 //auto action picture
-_pic = "\a3\Ui_f\data\gui\Rsc\RscDisplayArcadeMap\section_outrowin_ca.paa";
+_pic = "\ca\sounds\data\icon_soundsource_ca.paa";
 //auto action picture
-_txt = "Auto Earplugs Switched";
+_txt = "Auto Earplugs On/Off";
 //============================== End Settings ==============================\\
