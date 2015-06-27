@@ -20,7 +20,33 @@ if(isServer)exitWith{};
 	Contact : halvhjearne@gmail.com
 	
 	dayz_spaceinterupt add this:
-	_dikCode call HALV_earplugtoggle;
+	_handled = false;
+	
+	if(_dikCode in (HALV_EarplugKeys select 0) || {_dikCode in actionKeys _x}count(HALV_EarplugKeys select 1) > 0)then{
+		HALV_currentsoundlvl = HALV_currentsoundlvl - 0.1;
+		if(HALV_currentsoundlvl < 0)then{
+			HALV_currentsoundlvl = 0;
+		};
+		1 fadeSound HALV_currentsoundlvl;
+		_msg = format["Volume Decreased (%1%2) ...",round(HALV_currentsoundlvl*100),"%"];
+		if(HALV_currentsoundlvl == 0)then{_msg = format["Muted (0%1) ...","%"];};
+		hint _msg;
+		systemChat _msg;
+		_handled = true;
+	};
+	if(_dikCode in (HALV_EarplugKeys select 2) || {_dikCode in actionKeys _x}count(HALV_EarplugKeys select 3) > 0)then{
+		HALV_currentsoundlvl = HALV_currentsoundlvl + 0.1;
+		if(HALV_currentsoundlvl > 1)then{
+			HALV_currentsoundlvl = 1;
+		};
+		_msg = format["Volume Increased (%1%2)...",round(HALV_currentsoundlvl*100),"%"];
+		1 fadeSound HALV_currentsoundlvl;
+		if(HALV_currentsoundlvl == 1)then{_msg = format["Volume (100%1)","%"];};
+		hint _msg;
+		systemChat _msg;
+		_handled = true;
+	};
+	
 */
 #include "settings.sqf";
 
@@ -35,33 +61,6 @@ if (_txt != "")then{
 };
 
 HALV_currentsoundlvl = 1;
-
-HALV_earplugtoggle = {
-	_msg = "";
-	_key = _this;
-	if(_key in (HALV_EarplugKeys select 0) || {_key in actionKeys _x}count(HALV_EarplugKeys select 1) > 0)then{
-		HALV_currentsoundlvl = HALV_currentsoundlvl - 0.1;
-		if(HALV_currentsoundlvl < 0)then{
-			HALV_currentsoundlvl = 0;
-		};
-		1 fadeSound HALV_currentsoundlvl;
-		_msg = format["Volume Decreased (%1%2) ...",round(HALV_currentsoundlvl*100),"%"];
-		if(HALV_currentsoundlvl == 0)then{_msg = format["Muted (0%1) ...","%"];};
-		hint _msg;
-		systemChat _msg;
-	};
-	if(_key in (HALV_EarplugKeys select 2) || {_key in actionKeys _x}count(HALV_EarplugKeys select 3) > 0)then{
-		HALV_currentsoundlvl = HALV_currentsoundlvl + 0.1;
-		if(HALV_currentsoundlvl > 1)then{
-			HALV_currentsoundlvl = 1;
-		};
-		_msg = format["Volume Increased (%1%2)...",round(HALV_currentsoundlvl*100),"%"];
-		1 fadeSound HALV_currentsoundlvl;
-		if(HALV_currentsoundlvl == 1)then{_msg = format["Volume (100%1)","%"];};
-		hint _msg;
-		systemChat _msg;
-	};
-};
 
 _action = player addAction [format["<img image='%1'/> <t color='#0096ff'>%2</t>",_pic,_txt],_scriptpath,[], -20, false, true, _autohotkey, ""];
 
